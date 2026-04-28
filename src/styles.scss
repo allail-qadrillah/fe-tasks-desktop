@@ -1,0 +1,90 @@
+// ============================================
+// GLOBAL STYLES & SASS VARIABLES
+// ============================================
+
+// --- Color Palette ---
+$color-dark-nav:     #2c2c2c;   // navbar background
+$color-white:        #ffffff;
+$color-bg-page:      #f5f5f5;   // background halaman
+$color-border:       #d0d0d0;   // border card/tabel
+$color-border-light: #e8e8e8;   // border row tabel
+$color-text-primary: #333333;
+$color-text-muted:   #777777;
+$color-text-nav:     #cccccc;   // teks di navbar
+$color-blue-btn:     #2196f3;   // tombol sign in
+$color-blue-hover:   #1976d2;
+$color-table-header-bg: #f9f9f9;
+$color-row-hover:    #fafafa;
+
+// --- Typography ---
+$font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$font-size-base:   14px;
+$font-size-sm:     12px;
+$font-size-lg:     18px;
+$font-size-xl:     22px;
+
+// --- Spacing ---
+$spacing-xs:  4px;
+$spacing-sm:  8px;
+$spacing-md:  16px;
+$spacing-lg:  24px;
+$spacing-xl:  32px;
+
+// --- Border ---
+$border-radius-sm: 3px;
+$border-radius-md: 5px;
+$border-base: 1px solid $color-border;
+
+// --- Shadow ---
+$shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08);
+
+// ============================================
+// RESET & BASE
+// ============================================
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  color: $color-text-primary;
+  background-color: $color-bg-page;
+}
+
+// ============================================
+// REUSABLE MIXINS
+// ============================================
+
+// Flex center helper
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Flex between helper
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// Card style
+@mixin card {
+  background: $color-white;
+  border: $border-base;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-card;
+}
+
+// Loading spinner
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@mixin spin-animation($duration: 0.8s) {
+  animation: spin $duration linear infinite;
+}

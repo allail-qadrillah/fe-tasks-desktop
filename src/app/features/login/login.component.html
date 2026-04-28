@@ -1,0 +1,72 @@
+<!-- Login Page — full screen centered -->
+<div class="login-page">
+
+  <div class="login-card">
+
+    <!-- Header -->
+    <div class="login-card__header">
+      <h1>Sign in to your dashboard</h1>
+    </div>
+
+    <!-- Body -->
+    <div class="login-card__body">
+      <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+        <!-- API Error Alert -->
+        @if (errorMessage) {
+          <div class="login-form__alert">{{ errorMessage }}</div>
+        }
+
+        <!-- Username Field -->
+        <div class="login-form__group">
+          <input
+            class="login-form__input"
+            [class.login-form__input--error]="username.invalid && username.touched"
+            type="text"
+            formControlName="username"
+            placeholder="Username"
+          />
+          @if (username.touched && username.hasError('required')) {
+            <span class="login-form__error">Username is required</span>
+          }
+          @if (username.touched && username.hasError('email')) {
+            <span class="login-form__error">Please enter a valid email</span>
+          }
+        </div>
+
+        <!-- Password Field -->
+        <div class="login-form__group">
+          <input
+            class="login-form__input"
+            [class.login-form__input--error]="password.invalid && password.touched"
+            type="password"
+            formControlName="password"
+            placeholder="Password"
+          />
+          @if (password.touched && password.hasError('required')) {
+            <span class="login-form__error">Password is required</span>
+          }
+          @if (password.touched && password.hasError('minlength')) {
+            <span class="login-form__error">Password must be at least 6 characters</span>
+          }
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          class="login-form__submit"
+          type="submit"
+          [disabled]="isLoading"
+        >
+          @if (isLoading) {
+            <span class="spinner"></span>
+            <span>Signing in...</span>
+          } @else {
+            <span>Sign In</span>
+          }
+        </button>
+
+      </form>
+    </div>
+
+  </div>
+</div>

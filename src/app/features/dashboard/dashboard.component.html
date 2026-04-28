@@ -1,0 +1,106 @@
+<div class="dashboard">
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <!-- Brand kiri -->
+    <span class="navbar__brand">Dashboard</span>
+
+    <!-- Sign Out button kanan dengan icon -->
+    <button class="navbar__signout" (click)="onLogout()">
+      <!-- Icon sign-out (logout arrow) -->
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5-5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+      </svg>
+      Sign Out
+    </button>
+  </nav>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <div class="dashboard-content">
+
+    <!-- Loading State -->
+    @if (isLoading()) {
+      <div class="loading-state">
+        <div class="loading-state__spinner"></div>
+        <p class="loading-state__text">Loading dashboard data...</p>
+      </div>
+    }
+
+    <!-- Error State -->
+    @if (errorMessage && !isLoading()) {
+      <div class="error-state">
+        {{ errorMessage }}
+        <button (click)="fetchDashboardData()">Try again</button>
+      </div>
+    }
+    <!-- Dashboard Content -->
+    @if (!isLoading()) {
+
+      <!-- === OVERVIEW SECTION === -->
+      <h2 class="dashboard-content__section-title">Overview</h2>
+
+      <!-- Charts Grid — 2 kolom -->
+      <div class="charts-grid">
+
+        <!-- Donut Chart Card -->
+        <div class="chart-card">
+          <h3 class="chart-card__title">Card Title</h3>
+          <!-- Target element Plotly donut chart -->
+          <div id="donut-chart" class="chart-card__plot"></div>
+        </div>
+
+        <!-- Bar Chart Card -->
+        <div class="chart-card">
+          <h3 class="chart-card__title">Card Title</h3>
+          <!-- Target element Plotly bar chart -->
+          <div id="bar-chart" class="chart-card__plot"></div>
+        </div>
+
+      </div>
+
+      <!-- === USER LIST SECTION === -->
+      <h2 class="dashboard-content__section-title">User List</h2>
+
+      <div class="user-list">
+        <div class="user-list__table-wrapper">
+          <div class="user-list__scroll">
+
+            @if (tableUsers.length > 0) {
+              <table class="data-table">
+
+                <!-- Table Head — kolom dari API -->
+                <thead>
+                  <tr>
+                    @for (col of tableColumns; track col) {
+                      <th>{{ col }}</th>
+                    }
+                  </tr>
+                </thead>
+
+                <!-- Table Body — row dari data API -->
+                <tbody>
+                  @for (row of tableUsers; track $index) {
+                    <tr>
+                      @for (col of tableColumns; track col) {
+                        <td>{{ getCellValue(row, col) }}</td>
+                      }
+                    </tr>
+                  }
+                </tbody>
+
+              </table>
+            } @else {
+              <!-- Empty state -->
+              <div style="padding: 40px; text-align: center; color: #999;">
+                No user data available
+              </div>
+            }
+
+          </div>
+        </div>
+      </div>
+
+    }
+
+  </div>
+</div>

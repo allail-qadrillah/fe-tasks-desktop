@@ -1,0 +1,136 @@
+@use '../../../styles' as s;  
+
+// ============================================
+// LOGIN PAGE
+// ============================================
+
+.login-page {
+  // Full screen, konten di tengah
+  min-height: 100vh;
+  @include s.flex-center;
+  background-color: s.$color-bg-page;
+}
+
+// Card container login
+.login-card {
+  @include s.card;
+  width: 100%;
+  max-width: 420px;
+  overflow: hidden;
+
+  // Header card — background abu dengan judul
+  &__header {
+    background-color: s.$color-bg-page;
+    border-bottom: s.$border-base;
+    padding: s.$spacing-md s.$spacing-xl;
+    text-align: center;
+
+    h1 {
+      font-size: s.$font-size-base;
+      font-weight: 400;
+      color: s.$color-text-primary;
+    }
+  }
+
+  // Body berisi form
+  &__body {
+    padding: s.$spacing-lg s.$spacing-xl;
+  }
+}
+
+// Form styles
+.login-form {
+  // Setiap form group (label + input)
+  &__group {
+    margin-bottom: s.$spacing-md;
+  }
+
+  // Input field
+  &__input {
+    width: 100%;
+    padding: s.$spacing-sm s.$spacing-md;
+    font-size: s.$font-size-base;
+    font-family: s.$font-family-base;
+    color: s.$color-text-primary;
+    background: s.$color-white;
+    border: 1px solid s.$color-border;
+    border-radius: s.$border-radius-sm;
+    outline: none;
+    transition: border-color 0.2s ease;
+
+    &::placeholder {
+      color: #aaaaaa;
+    }
+
+    // Focus state
+    &:focus {
+      border-color: #80bef7;
+      box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.12);
+    }
+
+    // Error state — ditambahkan via [class.login-form__input--error]
+    &--error {
+      border-color: #e53935;
+
+      &:focus {
+        box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.12);
+      }
+    }
+  }
+
+  // Error message teks
+  &__error {
+    margin-top: s.$spacing-xs;
+    font-size: s.$font-size-sm;
+    color: #e53935;
+  }
+
+  // Alert error dari API
+  &__alert {
+    margin-bottom: s.$spacing-md;
+    padding: s.$spacing-sm s.$spacing-md;
+    background: #fdecea;
+    border: 1px solid #f5c6cb;
+    border-radius: s.$border-radius-sm;
+    font-size: s.$font-size-sm;
+    color: #c62828;
+  }
+
+  // Submit button
+  &__submit {
+    display: inline-flex;
+    align-items: center;
+    gap: s.$spacing-sm;
+    padding: s.$spacing-sm s.$spacing-lg;
+    font-size: s.$font-size-sm;
+    font-weight: 700;
+    font-family: s.$font-family-base;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: s.$color-white;
+    background-color: s.$color-blue-btn;
+    border: none;
+    border-radius: s.$border-radius-sm;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover:not(:disabled) {
+      background-color: s.$color-blue-hover;
+    }
+
+    &:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// Loading spinner kecil di dalam button
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: s.$color-white;
+  border-radius: 50%;
+  @include s.spin-animation(0.6s);
+}
