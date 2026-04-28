@@ -2,6 +2,10 @@
 
 A cross-platform **desktop application** version of the Dashboard App, built with **Electron** wrapping the Angular web app. Runs natively on Windows, macOS, and Linux.
 
+## 🔗 Live Demo
+
+> 🌐 **[Live Demo](https://drive.google.com/file/d/1TiWOSZmcs-Zo69uGD9pF5AnOlgT3y9Da/view?usp=sharing)**
+
 ## ✨ Features
 
 - 🖥️ **Native Desktop App** — Runs on Windows, macOS, and Linux
