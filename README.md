@@ -1,59 +1,124 @@
-# FeTasks
+# 🖥️ Dashboard App — Electron
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.8.
+A cross-platform **desktop application** version of the Dashboard App, built with **Electron** wrapping the Angular web app. Runs natively on Windows, macOS, and Linux.
 
-## Development server
+## ✨ Features
 
-To start a local development server, run:
+- 🖥️ **Native Desktop App** — Runs on Windows, macOS, and Linux
+- 🔐 **Sign In** — authentication with form validation
+- 📊 **Dashboard** — Interactive donut chart & bar chart
+- 📋 **User Table** — Data grid displaying users from API
+- 🔒 **Route Guard** — Protected routes; unauthenticated users are redirected to Sign In
+- 📦 **Packaged Installer** — Build distributable `.exe` / `.dmg` / `.AppImage`
+
+## 📁 Project Structure
+
+```
+src/
+├── app/
+│   ├── features/
+│   │   ├── dashboard/      # Dashboard module
+│   │   └── login/          # Sign In module
+│   ├── core/
+│   │   ├── guards/         # Auth route guard
+│   │   ├── interceptor/    # HTTP interceptor
+│   │   └── services/       # Service API
+│   ├── main.js             # Configuration Electron
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js `>= 14.x`
+- NPM `>= 6.x`
+- Angular CLI `>= 14.x`
 
 ```bash
+npm install -g @angular/cli@14
+```
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/allail-qadrillah/fe-tasks-desktop
+
+# Navigate to project folder
+cd fe-tasks-desktop
+
+# Install dependencies
+npm install
+```
+
+## 🧪 Development
+
+### Run in Development Mode
+
+Run Angular dev server and Electron together:
+
+```bash
+# Terminal 1 — Start Angular dev server
 ng serve
+
+# Terminal 2 — Start Electron (pointing to localhost:4200)
+npm run electron
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Or use a combined script if configured:
 
 ```bash
-ng generate component component-name
+npm run start:electron
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
+
+## 📦 Build & Package
+
+### Step 1 — Build Angular for Production
 
 ```bash
-ng generate --help
+ng build --configuration production --base-href ./
 ```
 
-## Building
-
-To build the project run:
+### Step 2 — Package with Electron Builder
 
 ```bash
-ng build
+# Package for current OS
+npm run electron:build
+
+# Package for specific OS
+npm run electron:build -- --win     # Windows (.exe)
+npm run electron:build -- --mac     # macOS (.dmg)
+npm run electron:build -- --linux   # Linux (.AppImage)
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Installers will be output to the `release/` folder.
 
-## Running unit tests
+---
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## 🔑 Credentials (Demo)
 
-```bash
-ng test
+| Field | Value |
+|-------|-------|
+| Email | `user@aemenersol.com` |
+| Password | `Test@123` |
+
+---
+
+## 🌐 API Reference
+
+### Sign In
+
+```
+POST http://test-demo.aemenersol.com/api/account/login
 ```
 
-## Running end-to-end tests
+### Dashboard Data
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
 ```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+GET http://test-demo.aemenersol.com/api/dashboard
+Authorization: Bearer <token>
+```
